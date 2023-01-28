@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CriticalService } from './critical.service';
 
 @Controller('critical')
 export class CriticalController {
   constructor(private readonly criticalService: CriticalService) {}
 
-  @Get()
-  async rds() {
-    return this.criticalService.getValues();
+  @Get(':id')
+  async findOne(@Param() params) {
+    return this.criticalService.getEmployee(params.id);
   }
 }
